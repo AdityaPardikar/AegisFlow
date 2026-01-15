@@ -26,9 +26,9 @@ services:
     #     property: connectionString
 
   # --------------------------------------------------------------------------------
-  # 2. Frontend Service (React Static Site)
+  # 2. Frontend Service (React as Web Service)
   # --------------------------------------------------------------------------------
-  - type: static
+  - type: web
     name: aegisflow-frontend
     runtime: node
     region: singapore
@@ -36,14 +36,14 @@ services:
       cd frontend
       npm install
       npm run build
-    publishDir: frontend/dist
+    startCommand: cd frontend && npx serve -s dist -l $PORT
     envVars:
       - key: VITE_API_URL
         fromService:
           type: web
           name: aegisflow-backend
-          envVarKey: RENDER_EXTERNAL_HOSTNAME # Auto-links to backend HTTPS URL
-        value: https://aegisflow-backend.onrender.com/api/v1 # Fallback/Format
+          envVarKey: RENDER_EXTERNAL_HOSTNAME
+        value: https://aegisflow-backend.onrender.com/api/v1
 
 # Optional: Add Database
 # databases:
