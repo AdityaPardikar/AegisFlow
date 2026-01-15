@@ -10,6 +10,7 @@ services:
       pip install -r backend/requirements.txt
       python backend/ml_engine/trainer.py
     startCommand: uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
+    plan: free
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
@@ -37,6 +38,7 @@ services:
       npm install
       npm run build
     startCommand: cd frontend && npx serve -s dist -l $PORT
+    plan: free
     envVars:
       - key: VITE_API_URL
         fromService:
