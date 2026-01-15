@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Base Colors - Dark Slate Theme */
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    /* Card with glassmorphism effect */
+    --card: 222 47% 13%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 13%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Primary - Cyber Blue Accent */
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 11%;
+
+    /* Secondary - Muted Slate */
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 33% 22%;
+    --accent-foreground: 210 40% 98%;
+
+    /* Risk Levels */
+    --risk-safe: 160 84% 39%;
+    --risk-safe-foreground: 160 84% 10%;
+    --risk-warning: 38 92% 50%;
+    --risk-warning-foreground: 38 92% 10%;
+    --risk-fraud: 350 89% 60%;
+    --risk-fraud-foreground: 350 89% 10%;
+
+    --destructive: 350 89% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 20%;
+    --input: 217 33% 17%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar */
+    --sidebar-background: 222 47% 9%;
+    --sidebar-foreground: 215 20% 65%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 222 47% 11%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 15%;
+    --sidebar-ring: 217 91% 60%;
+
+    /* Glassmorphism */
+    --glass-bg: 222 47% 11% / 0.7;
+    --glass-border: 217 33% 30% / 0.3;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(262 83% 58%));
+    --gradient-safe: linear-gradient(135deg, hsl(160 84% 39%), hsl(160 84% 30%));
+    --gradient-warning: linear-gradient(135deg, hsl(38 92% 50%), hsl(25 95% 53%));
+    --gradient-fraud: linear-gradient(135deg, hsl(350 89% 60%), hsl(330 81% 60%));
+    
+    /* Shadows */
+    --shadow-glow-primary: 0 0 40px hsl(217 91% 60% / 0.3);
+    --shadow-glow-safe: 0 0 30px hsl(160 84% 39% / 0.4);
+    --shadow-glow-warning: 0 0 30px hsl(38 92% 50% / 0.4);
+    --shadow-glow-fraud: 0 0 30px hsl(350 89% 60% / 0.4);
+    --shadow-card: 0 4px 24px hsl(222 47% 5% / 0.5);
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 13%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 13%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 11%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 217 33% 22%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 350 89% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 20%;
+    --input: 217 33% 17%;
+    --ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply dark;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Mono font for data */
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Card */
+  .glass-card {
+    @apply relative overflow-hidden rounded-xl border border-border/30 bg-card/70 backdrop-blur-xl;
+    box-shadow: var(--shadow-card);
+  }
+
+  .glass-card::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(135deg, hsl(var(--border) / 0.1) 0%, transparent 50%);
+  }
+
+  /* Risk Level Badges */
+  .risk-badge-safe {
+    @apply bg-risk-safe/20 text-risk-safe border border-risk-safe/30;
+  }
+
+  .risk-badge-warning {
+    @apply bg-risk-warning/20 text-risk-warning border border-risk-warning/30;
+  }
+
+  .risk-badge-fraud {
+    @apply bg-risk-fraud/20 text-risk-fraud border border-risk-fraud/30;
+  }
+
+  /* Pulse Animation for Live Indicators */
+  .pulse-safe {
+    animation: pulse-safe 2s ease-in-out infinite;
+  }
+
+  .pulse-warning {
+    animation: pulse-warning 2s ease-in-out infinite;
+  }
+
+  .pulse-fraud {
+    animation: pulse-fraud 1.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse-safe {
+    0%, 100% {
+      box-shadow: 0 0 0 0 hsl(var(--risk-safe) / 0.4);
+    }
+    50% {
+      box-shadow: 0 0 0 8px hsl(var(--risk-safe) / 0);
+    }
+  }
+
+  @keyframes pulse-warning {
+    0%, 100% {
+      box-shadow: 0 0 0 0 hsl(var(--risk-warning) / 0.4);
+    }
+    50% {
+      box-shadow: 0 0 0 8px hsl(var(--risk-warning) / 0);
+    }
+  }
+
+  @keyframes pulse-fraud {
+    0%, 100% {
+      box-shadow: 0 0 0 0 hsl(var(--risk-fraud) / 0.6);
+    }
+    50% {
+      box-shadow: 0 0 0 10px hsl(var(--risk-fraud) / 0);
+    }
+  }
+
+  /* Glow Effects */
+  .glow-primary {
+    box-shadow: var(--shadow-glow-primary);
+  }
+
+  .glow-safe {
+    box-shadow: var(--shadow-glow-safe);
+  }
+
+  .glow-fraud {
+    box-shadow: var(--shadow-glow-fraud);
+  }
+
+  /* Animated background grid */
+  .bg-grid {
+    background-image: 
+      linear-gradient(hsl(var(--border) / 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Scrollbar Styling */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-border/50 rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-border;
+  }
+
+  /* Stat card number styling */
+  .stat-value {
+    @apply text-4xl font-bold tracking-tight;
+    background: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--muted-foreground)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Transaction row animation */
+  .transaction-row-enter {
+    animation: slideInFromTop 0.3s ease-out;
+  }
+
+  @keyframes slideInFromTop {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Map dot animations */
+  .map-dot {
+    animation: mapDotPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes mapDotPulse {
+    0%, 100% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+}
+
+@layer utilities {
+  .text-risk-safe {
+    color: hsl(var(--risk-safe));
+  }
+
+  .text-risk-warning {
+    color: hsl(var(--risk-warning));
+  }
+
+  .text-risk-fraud {
+    color: hsl(var(--risk-fraud));
+  }
+
+  .bg-risk-safe {
+    background-color: hsl(var(--risk-safe));
+  }
+
+  .bg-risk-warning {
+    background-color: hsl(var(--risk-warning));
+  }
+
+  .bg-risk-fraud {
+    background-color: hsl(var(--risk-fraud));
+  }
+
+  .border-risk-safe {
+    border-color: hsl(var(--risk-safe));
+  }
+
+  .border-risk-warning {
+    border-color: hsl(var(--risk-warning));
+  }
+
+  .border-risk-fraud {
+    border-color: hsl(var(--risk-fraud));
+  }
+}

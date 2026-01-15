@@ -43,7 +43,6 @@ services:
           type: web
           name: aegisflow-backend
           envVarKey: RENDER_EXTERNAL_HOSTNAME
-        value: https://aegisflow-backend.onrender.com/api/v1
 
 # Optional: Add Database
 # databases:
