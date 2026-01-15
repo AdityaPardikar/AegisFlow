@@ -1,6 +1,6 @@
 # AegisFlow: A Next-Gen Fraud Detection & Prevention Engine
 
-![AegisFlow Banner](https://via.placeholder.com/1200x400?text=AegisFlow+Enterprise+Security)
+![AegisFlow Banner](assets/banner.png)
 
 > **Enterprise-Grade Financial Intelligence System** leveraging hybrid Machine Learning (XGBoost + Isolation Forest) to detect fraudulent anomalies in real-time (<200ms) with Explainable AI transparency.
 
